@@ -65,6 +65,7 @@
         "eg_copyright.h": "c",
         "eg_total_words.h": "c",
         "words.h": "c",
-        "eg_color.h": "c"
+        "eg_color.h": "c",
+        "text_chapter6.h": "c"
     }
 }

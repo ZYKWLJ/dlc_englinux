@@ -46,9 +46,4 @@
         printf(" %d\n", page); \
     } while(0)
 void display_chapter1() ;
-// int main() {
-    
-
-//     return 0;
-// }
 #endif

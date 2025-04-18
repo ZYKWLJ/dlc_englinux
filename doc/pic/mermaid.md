@@ -75,3 +75,14 @@ flowchart TB
 
  
 ```
+
+从执行角度看数据库整体图
+```mermaid
+graph TD;
+    嵌入式微型大气数据库 --> sql;
+    sql --> Token;
+    Token --> Lexer;
+    Lexer --> Parser;
+    Parser --> Executor;
+    Executor --> Display;
+```

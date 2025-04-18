@@ -19,6 +19,7 @@
 // #include "execute/text_myTime.h"
 #include "execute/text_similarInstructions.h"
 #include "chapters/chapters.h"
+#include "chapters/chapters/text_chapter0.h"
 #include "chapters/chapters/text_chapter6.h"
 #include "chapters/chapters/text_chapter1.h"
 #include "chapters/chapters/text_common.h"

@@ -4,15 +4,7 @@ void display_chapters(int chapter_num)
     switch (chapter_num)
     {
     case 0:
-        display_chapter1();
-        display_chapter2();
-        display_chapter3();
-        display_chapter4();
-        display_chapter5();
-        display_chapter6();
-        display_chapter7();
-        display_chapter8();
-        display_chapter9();
+        display_chapter0();
         break;
     case 1:
         display_chapter1();
