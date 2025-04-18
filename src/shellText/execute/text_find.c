@@ -1,14 +1,67 @@
 #include "../../../include/shellText/include.h"
 
 // 精确查找单词
-// 判断字符串是否全是中文
+
+// 章节信息结构体
+typedef struct
+{
+    int start_page;
+    int end_page;
+    int match_count;
+} Chapter;
+
+// 打印章节匹配统计信息
+void print_chapter_stats(Chapter *chapters, int chapter_count)
+{
+    // printf("cahapters_count=%d\n\n",chapter_count);
+    const char *chapter_names[100];
+    const char *match_counts[100];
+    chapter_names[0] = strdup("章节数");
+    match_counts[0] = strdup("匹配次数");
+    for (int i = 1; i <= chapter_count; i++)
+    {
+        char chapter_name[50];
+        char match_count_str[20];
+        sprintf(chapter_name, "第 %d 章", i);
+        sprintf(match_count_str, "%d 处匹配", chapters[i - 1].match_count);
+        chapter_names[i] = strdup(chapter_name);
+        match_counts[i] = strdup(match_count_str);
+    }
+    chapter_names[chapter_count+1] = NULL;
+    match_counts[chapter_count+1] = NULL;
+
+    const char **columns[] = {chapter_names, match_counts};
+    text_print_help(columns, sizeof(columns) / sizeof(columns[0]));
+
+    // 释放动态分配的内存
+    for (int i = 0; i < chapter_count; i++)
+    {
+        free((void *)chapter_names[i]);
+        free((void *)match_counts[i]);
+    }
+}
+
 int find_and_highlight(char **s, int s_size, char *t)
 {
+    // 定义章节信息
+    Chapter chapters[] = {
+        {1, 11, 0},
+        {12, 90, 0},
+        {91, 200, 0},
+        {201, 205, 0},
+        {206, 254, 0},
+        {255, 352, 0},
+        {353, 368, 0},
+        {369, 420, 0},
+        {421, s_size, 0}};
+    int chapter_count = sizeof(chapters) / sizeof(chapters[0]);
+
     int flag = 0;
     int first = 1;
     int current_page_count = 0; // 计算本页面共有多少处匹配。
     int total_page_count = 0;   // 计算所有页面共有多少处匹配。
     int page_count = 0;         // 统计页面数！
+
     for (int i = 0; i < s_size; i++)
     {
         char *p = s[i];
@@ -22,6 +75,7 @@ int find_and_highlight(char **s, int s_size, char *t)
             }
             p++;
         }
+
         if (found)
         {
             p = s[i];
@@ -37,6 +91,17 @@ int find_and_highlight(char **s, int s_size, char *t)
                     p++;
                 }
             }
+
+            // 统计当前页面匹配属于哪个章节
+            for (int j = 0; j < chapter_count; j++)
+            {
+                if (i + 1 >= chapters[j].start_page && i + 1 <= chapters[j].end_page)
+                {
+                    chapters[j].match_count += current_page_count;
+                    break;
+                }
+            }
+
             printf("%s%s\n第%d页，共%d处匹配:%s\n", BOLD, BLUE, i + 1, current_page_count, RESET);
             total_page_count += current_page_count; // 累计总共匹配的次数！
             current_page_count = 0;
@@ -61,7 +126,12 @@ int find_and_highlight(char **s, int s_size, char *t)
             printf("\n\n");
         }
     }
-    printf("\n%s%s\"%s\"%s%s%s共在%d页中出现，共%d处匹配:%s\n", BOLD, RED,t,RESET,BOLD, BLUE, page_count, total_page_count, RESET);
+
+    // 输出每个章节的匹配数量
+    printf("\n%s%s\"%s\"%s%s%s--各章节匹配数量统计：%s\n",BOLD, RED, t, RESET,BLUE,BOLD,RESET);
+    print_chapter_stats(chapters, chapter_count);
+    printf("\n%s%s\"%s\"%s%s%s--共在%d页中出现，共%d处匹配%s\n", BOLD, RED, t, RESET, BOLD, BLUE, page_count, total_page_count, RESET);
+
     return flag; // 判断是否找到！
 }
 
