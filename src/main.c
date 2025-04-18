@@ -57,8 +57,6 @@ void text()
 // 主函数
 int main()
 {
-    // 注册信号处理函数
-    signal(SIGINT, text_exit_signal_handler);
     char *str;
     text_print_copyright();
     text();

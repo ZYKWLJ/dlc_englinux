@@ -6,7 +6,8 @@ char *eg_instructions_all[] = {
     "clear",   // 清屏 3
     "exit",    // 退出程序 4
     "f",
-    "total"
+    "total",
+    "back"
 };
 
 
@@ -48,7 +49,7 @@ void eg_find_similar_commands(char *input)
             if (!found)
             {
                 printf("你可能想输入的命令是：\n");
-                // found = 1;
+                found = 1;
             }
             printf(YELLOW "%s\t" RESET, eg_instructions_all[i]);
         }

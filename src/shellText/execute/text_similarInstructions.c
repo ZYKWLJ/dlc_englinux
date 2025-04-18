@@ -32,7 +32,7 @@ char *instructions_all[] = {
     "p",       // 27
     "f" ,       // 28同find
     "eg",//29进入查询单词
-    "back"//30动态时间
+    // "back"//30动态时间
 };
 
 

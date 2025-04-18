@@ -1,4 +1,4 @@
-# include "../../../include/shellText/include.h"
+#include "../../../include/shellText/include.h"
 
 // 精确查找单词
 // 判断字符串是否全是中文
@@ -6,7 +6,9 @@ int find_and_highlight(char **s, int s_size, char *t)
 {
     int flag = 0;
     int first = 1;
-    int count = 0;
+    int current_page_count = 0; // 计算本页面共有多少处匹配。
+    int total_page_count = 0;   // 计算所有页面共有多少处匹配。
+    int page_count = 0;         // 统计页面数！
     for (int i = 0; i < s_size; i++)
     {
         char *p = s[i];
@@ -22,18 +24,29 @@ int find_and_highlight(char **s, int s_size, char *t)
         }
         if (found)
         {
-            printf("%s%s\n第%d页搜索结果:%s\n", BOLD, BLUE, i + 1, RESET);
-            if (!first)
+            p = s[i];
+            while (*p) // 先计算本页面出共多少处匹配！
             {
-                // putchar(',');
-                // puts("");
+                if (strncmp(p, t, strlen(t)) == 0)
+                {
+                    current_page_count++;
+                    p += strlen(t);
+                }
+                else
+                {
+                    p++;
+                }
             }
+            printf("%s%s\n第%d页，共%d处匹配:%s\n", BOLD, BLUE, i + 1, current_page_count, RESET);
+            total_page_count += current_page_count; // 累计总共匹配的次数！
+            current_page_count = 0;
+            page_count++; // 统计页面数！
             p = s[i];
             while (*p)
             {
                 if (strncmp(p, t, strlen(t)) == 0)
                 {
-
+                    // count++;
                     printf("%s%s%s%s", BOLD, YELLOW, t, RESET);
                     p += strlen(t);
                     flag = 1;
@@ -48,7 +61,7 @@ int find_and_highlight(char **s, int s_size, char *t)
             printf("\n\n");
         }
     }
-    // printf("\n");
+    printf("\n%s%s\"%s\"%s%s%s共在%d页中出现，共%d处匹配:%s\n", BOLD, RED,t,RESET,BOLD, BLUE, page_count, total_page_count, RESET);
     return flag; // 判断是否找到！
 }
 
@@ -76,7 +89,7 @@ void text_find(char *str)
     // printf("%s%s[查找知识点 ......]> \n%s", BOLD, YELLOW, RESET);
     // printf("查找特定的知识点。\n");
     int size = 0;
-    for (int i = 0; strcmp(all_pages[i], "NULL"); i++)
+    for (int i = 0; strcmp(all_pages[i], "NULL"); i++) // 计算一共有多少页！软编码！方便后续加入页面！
     {
         size++;
         // printf("size:%d\n",size);

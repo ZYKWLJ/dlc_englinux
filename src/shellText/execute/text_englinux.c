@@ -20,12 +20,6 @@ void englinux()
             printf("\n程序终止\n");
             break;
         }
-        // 退出单词查询
-        if (strcmp(str, "back") == 0)
-        {
-            text_print_copyright();
-            return;
-        }
         if (strlen(str) == 0)
         {
             // 空输入，继续循环
@@ -45,7 +39,10 @@ void englinux()
         // 执行指令
         // printf("这里接入英语的查询\n");
         eg_execute(str);
-
+        // 为了命令的一致性，所以把back的动作放在里面了
+        if(strcmp(str,"back")==0){
+            return;
+        }
         // 添加到历史记录
         add_history(str_copy); // 这里传入的是原始复制字符串，原始字符串的修改对我没影响
 

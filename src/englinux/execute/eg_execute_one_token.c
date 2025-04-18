@@ -25,6 +25,10 @@ void execute_one_token(char *token[], int token_num, char *origin_str)
     {
         eg_total_words();
         return;
+    }else if (strcmp(token[0], "back") == 0){
+        // 退出单词查询
+        text_print_copyright();
+        return;
     }
     // 单长度指令find、f需要单独判断！
     else if (strcmp(token[0], "find") == 0 || strcmp(token[0], "f") == 0)
