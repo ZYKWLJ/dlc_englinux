@@ -6,6 +6,7 @@
 #include "eg_help.h"
 #include "../display/eg_endSay.h"
 #include "../display/eg_error.h"
+#include "../display/eg_story.h"
 #include "eg_clear.h"
 #include "../display/eg_author.h"
 #include "../display/eg_find_help.h"

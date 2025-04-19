@@ -26,7 +26,7 @@ void text_execute_two_token(char *token[], char *origin_str)
     }
     if (strcmp(token[0], "page") == 0 || strcmp(token[0], "p") == 0)
     {
-        printf("page\n");
+        // printf("page\n");
 
         if (!is_all_digit(token[1]))
         {

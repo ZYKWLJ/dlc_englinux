@@ -67,6 +67,9 @@
         "words.h": "c",
         "eg_color.h": "c",
         "text_chapter6.h": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "text_page3.h": "c",
+        "text_page27.h": "c",
+        "word_set.h": "c"
     }
 }

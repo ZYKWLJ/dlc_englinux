@@ -2,7 +2,7 @@
 
 void text_execute_one_token(char *token[], int token_num, char *origin_str)
 {
-    if (strcmp(token[0], "help") == 0)
+    if (strcmp(token[0], "help") == 0||strcmp(token[0], "h") == 0)
     {
         text_help();
         return;
@@ -12,7 +12,7 @@ void text_execute_one_token(char *token[], int token_num, char *origin_str)
         text_clear();
         return;
     }
-    else if (strcmp(token[0], "exit") == 0)
+    else if (strcmp(token[0], "quit") == 0||strcmp(token[0], "q") == 0)
     {
         text_exit_signal_handler(2);
     }
@@ -31,7 +31,7 @@ void text_execute_one_token(char *token[], int token_num, char *origin_str)
         printf(SUBJECT);
         return;
     }
-    else if (strcmp(token[0], "eg") == 0)
+    else if (strcmp(token[0], "eg") == 0||strcmp(token[0], "e") == 0)
     {
         englinux();
         return;

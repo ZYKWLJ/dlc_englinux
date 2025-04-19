@@ -1,7 +1,7 @@
 #include "../../../include/englinux/execute/eg_execute_one_token.h"
 void execute_one_token(char *token[], int token_num, char *origin_str)
 {
-    if (strcmp(token[0], "help") == 0)
+    if (strcmp(token[0], "help") == 0||strcmp(token[0], "h") == 0)
     {
         eg_help();
         find_help();
@@ -12,7 +12,7 @@ void execute_one_token(char *token[], int token_num, char *origin_str)
         clear();
         return;
     }
-    else if (strcmp(token[0], "exit") == 0)
+    else if (strcmp(token[0], "quit") == 0||strcmp(token[0], "q") == 0)
     {
         eg_exit_signal_handler(2);
         return;
@@ -25,9 +25,13 @@ void execute_one_token(char *token[], int token_num, char *origin_str)
     {
         eg_total_words();
         return;
-    }else if (strcmp(token[0], "back") == 0){
+    }else if (strcmp(token[0], "back") == 0||strcmp(token[0], "b") == 0){
         // 退出单词查询
         text_print_copyright();
+        return;
+    }else if (strcmp(token[0], "story") == 0){
+        // 退出单词查询
+        printf("%s",EG_STORY);
         return;
     }
     // 单长度指令find、f需要单独判断！

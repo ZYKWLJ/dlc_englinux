@@ -15,7 +15,8 @@ void text()
     while (1)
     {
         char prompt[100];
-        sprintf(prompt, "%s%s[对流层~请输入指令]> %s", BOLD, GREEN, RESET);
+        // sprintf(prompt, "%s%s[对流层~请输入指令]> %s", BOLD, GREEN, RESET);
+        sprintf(prompt, TEXT_PROMPT, BOLD, GREEN, YELLOW, BOLD, GREEN, RESET);
         str = readline(prompt);
 
         if (str == NULL)

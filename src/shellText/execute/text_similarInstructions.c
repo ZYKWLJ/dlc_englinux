@@ -2,10 +2,12 @@
 char *instructions_all[] = {
     // 全局指令
     "help",    // 帮助指令 0
+    "h",       // 同help
     "list",    // 列出所有章节 1
     "find",    // 查找知识点 2
     "clear",   // 清屏 3
-    "exit",    // 退出程序 4
+    "quit",    // 退出程序 4
+    "q",
     "story",   // 软件背后的故事 5
     "author",  // 作者信息 6
     "subject", // 学科介绍 7
@@ -32,6 +34,7 @@ char *instructions_all[] = {
     "p",       // 27
     "f" ,       // 28同find
     "eg",//29进入查询单词
+    "e"
     // "back"//30动态时间
 };
 
@@ -88,17 +91,3 @@ void text_find_similar_commands(char *input)
         printf("\n");
     }
 }
-
-// int main()
-// {
-//     while (1)
-//     {
-//         char input[100];
-//         printf("请输入命令：");
-//         fgets(input, sizeof(input), stdin);
-//         input[strcspn(input, "\n")] = 0; // 去除换行符
-
-//         find_similar_commands(input);
-//     }
-//     return 0;
-// }

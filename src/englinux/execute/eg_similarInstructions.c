@@ -2,12 +2,17 @@
 char *eg_instructions_all[] = {
     // 全局指令
     "help",    // 帮助指令 0
+    "h",
     "find",    // 查找知识点 2
     "clear",   // 清屏 3
-    "exit",    // 退出程序 4
+    "quit",    // 退出程序 4
+    "q",
     "f",
     "total",
-    "back"
+    "back",
+    "b",
+    "author",
+    "story",
 };
 
 
@@ -63,17 +68,3 @@ void eg_find_similar_commands(char *input)
         printf("\n");
     }
 }
-
-// int main()
-// {
-//     while (1)
-//     {
-//         char input[100];
-//         printf("请输入命令：");
-//         fgets(input, sizeof(input), stdin);
-//         input[strcspn(input, "\n")] = 0; // 去除换行符
-
-//         find_similar_commands(input);
-//     }
-//     return 0;
-// }

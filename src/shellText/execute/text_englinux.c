@@ -1,6 +1,7 @@
 #include "../../../include/shellText/include.h"
 #include "../../../include/englinux/execute/eg_execute.h"
 #include "../../../include/englinux/display/eg_copyRight.h"
+#include "../../../include/englinux/display/eg_prompt.h"
 // 单词查询
 void englinux()
 {
@@ -11,7 +12,7 @@ void englinux()
     while (1)
     {
         char prompt[100];
-        sprintf(prompt, "%s%s[英语查询~请输入指令]> %s", BOLD, GREEN, RESET);
+        sprintf(prompt, EG_PROMPT, BOLD, GREEN, YELLOW, BOLD, GREEN, RESET);
         str = readline(prompt);
 
         if (str == NULL)
@@ -40,7 +41,7 @@ void englinux()
         // printf("这里接入英语的查询\n");
         eg_execute(str);
         // 为了命令的一致性，所以把back的动作放在里面了
-        if(strcmp(str,"back")==0){
+        if(strcmp(str,"back")==0||strcmp(str,"b")==0){
             return;
         }
         // 添加到历史记录

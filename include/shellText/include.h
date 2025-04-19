@@ -36,6 +36,7 @@
 #include "display/text_copyRight.h"
 #include "display/text_error.h"
 #include "display/text_color.h"
+#include "display/text_prompt.h"
 
 #include "display/text_find_help.h"
 #include "display/text_display.h"
