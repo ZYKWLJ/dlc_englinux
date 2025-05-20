@@ -63,28 +63,30 @@ int count_common_chars(const char *str1, const char *str2)
     return common;
 }
 
-// 查找相似命令
+// Find similar commands
 void text_find_similar_commands(char *input)
 {
     int input_len = strlen(input);
     int found = 0;
-    // printf("指令集长度:%d\n", sizeof(instructions_all)/sizeof(instructions_all[0]));
+    // printf("Command set size: %d\n", sizeof(instructions_all)/sizeof(instructions_all[0]));
+    
     for (int i = 0; i < sizeof(instructions_all)/sizeof(instructions_all[0]); i++)
     {
         int common = count_common_chars(input, instructions_all[i]);
-        if (common >input_len / 2)//只要超过一半正确的就认为命令是相似的！
+        if (common > input_len / 2) // Consider commands similar if more than half the characters match
         {
             if (!found)
             {
-                printf("你可能想输入的命令是：\n");
+                printf("Did you mean:\n");
                 found = 1;
             }
             printf(YELLOW "%s\t" RESET, instructions_all[i]);
         }
     }
+    
     if (!found)
     {
-        printf("未找到相似命令。\n");
+        printf("No similar commands found.\n");
     }
     else
     {

@@ -1,12 +1,12 @@
-# include "../../../include/shellText/include.h"
-
+#include "../../../include/shellText/include.h"
 
 // 信号处理函数
 void text_exit_signal_handler(int signum)
 {
     if (signum == SIGINT)
     {
-        printf("\n%s%s退出程序！%s\n", RED, BOLD, RESET);
+
+        printf("\n%s%sExiting program...%s\n", RED, BOLD, RESET);
         printf(ENDSAY);
         exit(0);
     }

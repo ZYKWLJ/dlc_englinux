@@ -5,6 +5,10 @@
 #include <wchar.h>
 #include <locale.h>
 #include "text_common.h"
+// 设置中文环境
+#define SET_CHINESE_LOCALE() \
+    setlocale(LC_ALL, "");   \
+    setlocale(LC_CTYPE, "zh_CN.UTF-8")
 
 // 定义章节宏
 #define CHAPTER_1(title, page) \

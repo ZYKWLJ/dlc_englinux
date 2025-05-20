@@ -1,6 +1,11 @@
-# include "../../../../include/shellText/include.h"
-void display_chapter0() {
-    setlocale(LC_ALL, ""); // 设置本地化，支持宽字符
+#include "../../../../include/shellText/include.h"
+void display_chapter0()
+{
+    // setlocale(LC_ALL, "");      // 设置本地化，支持宽字符
+    SET_CHINESE_LOCALE();
+
+    system("chcp 65001 > nul"); // 隐藏命令输出
+
     CHAPTER_1("绪论", 1);
     CHAPTER_2("晴空大气的物理及电磁特性", 12);
     CHAPTER_3("大气沉降粒子物理及电磁特性", 91);

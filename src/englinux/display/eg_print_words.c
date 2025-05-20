@@ -3,39 +3,27 @@
 
 int display_width_words(const char *str)
 {
-    if (str == NULL)
-        return 0;
+    wchar_t wstr[1000];
+    mbstowcs(wstr, str, sizeof(wstr) / sizeof(wstr[0]));
 
-    setlocale(LC_ALL, "en_US.utf8"); // 确保宽字符处理正确
-    mbstate_t state = {0};
-    const char *ptr = str;
-    size_t bytes;
-    wchar_t wc;
     int width = 0;
-
-    while ((bytes = mbrtowc(&wc, ptr, MB_CUR_MAX, &state)) > 0)
+    for (int i = 0; wstr[i] != L'\0'; i++)
     {
-        if (bytes == (size_t)-1 || bytes == (size_t)-2)
+        if (iswprint(wstr[i]))
         {
-            // 非法UTF-8序列，按单字节处理
-            width += 1;
-            ptr += 1;
-            continue;
+            if (wstr[i] < 0x80)
+            {
+                width += 1;
+            }
+            else
+            {
+                width += 2;
+            }
         }
-        #include <wchar.h> // 再次明确包含
-        // 判断字符宽度
-        int char_width = wcwidth(wc);
-        if (char_width < 0)
-        {
-            // 控制字符等，按0宽度处理
-            char_width = 0;
-        }
-        width += char_width;
-        ptr += bytes;
     }
-
     return width;
 }
+
 // 打印固定宽度的字符串，考虑中文字符和高亮
 void print_padded_words(const char *str, int width, const char *highlight_start, const char *highlight_end)
 {
@@ -143,13 +131,16 @@ void get_highlight_positions(const char *word, const char *search_str, int match
             }
             break;
         case 3: // 包含
-            const char *match_pos = strstr(word, search_str);
+        {
+            char *match_pos = strstr(word, search_str);
             if (match_pos != NULL)
             {
                 *highlight_start = match_pos;
                 *highlight_end = match_pos + search_len;
             }
             break;
+        }
+
         default:
             // 处理非法的 match_mod
             fprintf(stderr, "Invalid match mode: %d\n", match_mod);

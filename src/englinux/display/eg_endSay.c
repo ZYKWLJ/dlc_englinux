@@ -5,7 +5,9 @@ void eg_exit_signal_handler(int signum)
 {
     if (signum == SIGINT)
     {
-        printf("\n%s%s退出程序！%s\n", RED, BOLD, RESET);
+                printf("\n%s%sExiting program...%s\n", RED, BOLD, RESET);
+
+        // printf("\n%s%s退出程序！%s\n", RED, BOLD, RESET);
         printf(ENDSAY);
         exit(0);
     }

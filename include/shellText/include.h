@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
-#include <readline/history.h>
-#include <readline/readline.h>
+// #include <readline/history.h>
+// #include <readline/readline.h>
 #include "execute/text_execute_one_token.h"
 #include "execute/text_englinux.h"
 #include "execute/text_is_all_digit.h"

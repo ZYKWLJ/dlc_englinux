@@ -2,7 +2,9 @@
 # include "../../../../include/shellText/include.h"
 
 void display_chapter1() {
-    setlocale(LC_ALL, ""); // 设置本地化，支持宽字符
+    // setlocale(LC_ALL, ""); // 设置本地化，支持宽字符
+    // 设置中文环境
+    SET_CHINESE_LOCALE();
     CHAPTER_1("绪论", 1);
     CHAPTER_1_SUB_SECTION_1(1, "概述", 1);
     CHAPTER_1_SUB_SECTION_1(2, "对流层中的传输效应及其产生机理", 3);

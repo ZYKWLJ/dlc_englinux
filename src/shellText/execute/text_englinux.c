@@ -7,50 +7,30 @@ void englinux()
 {
     // 注册信号处理函数
     signal(SIGINT, text_exit_signal_handler);
-    char *str;
-     _eg_print_copyright();
+    // char str[1000];
+    _eg_print_copyright();
+    char str[1000];
     while (1)
     {
         char prompt[100];
+        // sprintf(prompt, "%s%s[对流层~请输入指令]> %s", BOLD, GREEN, RESET);
         sprintf(prompt, EG_PROMPT, BOLD, GREEN, YELLOW, BOLD, GREEN, RESET);
-        str = readline(prompt);
-
+        // str = readli
+        // ne(prompt);
+        printf(prompt);
+        fgets(str, 1000, stdin);
+        str[strlen(str) - 1] = '\0';
         if (str == NULL)
         {
             // 用户按下 Ctrl+D
-            printf("\n程序终止\n");
+            printf("\n%s%sExiting program...%s\n", RED, BOLD, RESET);
             break;
         }
-        if (strlen(str) == 0)
-        {
-            // 空输入，继续循环
-            free(str);
-            continue;
-        }
-
-        // 复制 str
-        char *str_copy = strdup(str);
-        if (str_copy == NULL)
-        {
-            perror("内存分配失败");
-            free(str);
-            continue;
-        }
-
         // 执行指令
-        // printf("这里接入英语的查询\n");
-        eg_execute(str);
-        // 为了命令的一致性，所以把back的动作放在里面了
-        if(strcmp(str,"back")==0||strcmp(str,"b")==0){
-            return;
+        eg_execute(str); // 这里传入的是原始字符串，可能会被修改
+        if (strcmp(str, "b") == 0 || strcmp(str, "back") == 0)
+        {
+            break;
         }
-        // 添加到历史记录
-        add_history(str_copy); // 这里传入的是原始复制字符串，原始字符串的修改对我没影响
-
-        // 释放复制的字符串
-        free(str_copy);
-        // 释放 readline 分配的内存
-        free(str);
-        // while (getchar()!='\n');
     }
 }
